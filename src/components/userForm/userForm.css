@@ -1,0 +1,41 @@
+form{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    position: relative;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: left;
+}
+
+.user-input{ 
+    display: block;
+    position: relative;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000;
+    font-weight: 300;
+    margin: 10px 0px;
+}
+
+label{
+    font-size: 15px;
+    color: black;
+    font-weight: 600;
+    font-family: "Open Sans", sans-serif;
+}
+
+select{
+    display: block;
+    position: relative;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000;
+    font-weight: 300;
+    margin: 10px 0px;
+}
