@@ -1,7 +1,4 @@
-.user-form{
-    display: flex;
 
-}
 form{
     display: flex;
     flex-direction: column;
@@ -13,24 +10,7 @@ form{
     text-align: left;
 }
 
-.user-input{ 
-    display: block;
-    position: relative;
-    height: 40px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #000;
-    font-weight: 300;
-    margin: 10px 0px;
-}
 
-label{
-    font-size: 15px;
-    color: black;
-    font-weight: 600;
-    font-family: "Open Sans", sans-serif;
-}
 
 select{
     display: block;
@@ -43,7 +23,6 @@ select{
     font-weight: 300;
     margin: 10px 0px;
 }
-
 button{
     border-color: #cc4036;
     background-color: #cc4036;
