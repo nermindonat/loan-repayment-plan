@@ -18,12 +18,12 @@ const UserForm = () => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     setData({
-      loanAmount: loanAmountRef.current.getValue(),
-      paymentNumber: paymentNumberRef.current.getValue(),
-      profileRate: profitRateRef.current.getValue(),
-      selectedOne: selectOneRef.current.getValue(),
-      selectedTwo: selectTwoRef.current.getValue(),
-      selectedThree: selectThreeRef.current.getValue(),
+      krediTutari: loanAmountRef.current.getValue(),
+      taksitSayisi: paymentNumberRef.current.getValue(),
+      karOrani: profitRateRef.current.getValue(),
+      taksitAraligi: selectOneRef.current.getValue(),
+      vergiOrani: selectTwoRef.current.getValue(),
+      karFormulu: selectThreeRef.current.getValue(),
     });
 
 
