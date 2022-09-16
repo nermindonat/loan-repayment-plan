@@ -7,6 +7,7 @@ import { useDataContext } from "../../context/DataForm";
 const UserForm = () => {
   const { setData } = useDataContext();
 
+
   const loanAmountRef = useRef();
   const paymentNumberRef = useRef();
   const profitRateRef = useRef();
@@ -24,6 +25,8 @@ const UserForm = () => {
       selectedTwo: selectTwoRef.current.getValue(),
       selectedThree: selectThreeRef.current.getValue(),
     });
+
+
   };
 
   return (
@@ -33,18 +36,21 @@ const UserForm = () => {
           label={"Kredi Tutari"}
           type="number"
           name={"krediTutari"}
+          id={"krediTutari"}
           ref={loanAmountRef}
         />
         <Input
           label={"Taksit sayisi"}
           type="number"
           name={"taksitSayisi"}
+          id={"taksitSayisi"}
           ref={paymentNumberRef}
         />
         <Input
-          label={"Kar orani"}
+          label={"Kar Orani"}
           type="number"
           name={"karOrani"}
+          id={"karOrani"}
           ref={profitRateRef}
         />
 

@@ -5,6 +5,8 @@ import Table from "./components/table/Table";
 import { DataProvider } from "./context/DataForm";
 
 function App() {
+
+
   return (
     <>
       <Navbar />
