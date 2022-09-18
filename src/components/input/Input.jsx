@@ -2,7 +2,7 @@ import React, { useRef, forwardRef, useImperativeHandle } from "react";
 import "./input.css";
 
 const Input = forwardRef((props, ref) => {
-  const { label, type = "text", name, id } = props;
+  const { label, type = "text", name } = props;
   const inputRef = useRef();
   useImperativeHandle(ref, () => {
     return {
@@ -19,7 +19,6 @@ const Input = forwardRef((props, ref) => {
         className="user-input" 
         type={type}
         name={name}
-        id={id}
         ref={inputRef}
         autoComplete="off"
       />

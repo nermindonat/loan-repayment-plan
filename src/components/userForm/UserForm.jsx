@@ -20,7 +20,7 @@ const UserForm = () => {
     setData({
       krediTutari: loanAmountRef.current.getValue(),
       taksitSayisi: paymentNumberRef.current.getValue(),
-      karOrani: profitRateRef.current.getValue(),
+      faizOrani: profitRateRef.current.getValue(),
       taksitAraligi: selectOneRef.current.getValue(),
       vergiOrani: selectTwoRef.current.getValue(),
       karFormulu: selectThreeRef.current.getValue(),
@@ -47,10 +47,9 @@ const UserForm = () => {
           ref={paymentNumberRef}
         />
         <Input
-          label={"Kar Orani"}
+          label={"Faiz Orani"}
           type="number"
-          name={"karOrani"}
-          id={"karOrani"}
+          name={"faizOrani"}
           ref={profitRateRef}
         />
 
@@ -66,7 +65,7 @@ const UserForm = () => {
         />
         <Select
           label={"Vergi Oranı"}
-          name={"taksivergiOrani"}
+          name={"vergiOrani"}
           ref={selectTwoRef}
           options={[
             { label: "KKDF", value: "kkdf" },
