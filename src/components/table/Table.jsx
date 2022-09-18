@@ -10,87 +10,70 @@ const Table = () => {
     return null;
   }
 
-  let aralik;
-    if (data.taksitAraligi === "haftalik") {
-      aralik = 7;
-    } else if (data.taksitAraligi === "aylik") {
-      aralik = 30;
+  let space;
+    if (data.installmentInterval === "haftalik") {
+      space = 7;
+    } else if (data.installmentInterval === "aylik") {
+      space = 30;
     } else {
-      aralik = 365;
+      space = 365;
     }
 
+  const bsmvRate = 5;
+  const kkdfRate = 15;
+  let installmentAmount = 0;
+  let principal = 0;
+  let remainingPrincipal = 0;
+  let bsmvQuantity = 0;
+  let kkdfQuantity = 0;
+  let profitAmount = 0;
 
-  const bsmvOrani = 5;
-  const kkdfOrani = 15;
-  let taksitTutari = 0;
-  let anaPara = 0;
-  let kalanAnaPara = 0;
-  let bsmvMiktari = 0;
-  let kkdfMiktari = 0;
-  let karTutari = 0;
-
-  if (data.karFormulu === "basit") {    
+  if (data.profitPeriod === "basit") {    
    
-    const {krediTutari, faizOrani, taksitSayisi} = data;  // Destructing 
+    const {creditAmount, interestRate, installmentNumber} = data;  // Destructing 
+    const interestAmount = (creditAmount * interestRate * installmentNumber) / 100;
 
-    const faizTutari = krediTutari * faizOrani * taksitSayisi;
-    console.log(faizTutari);
+    bsmvQuantity = (interestAmount * bsmvRate) / 100;
+    kkdfQuantity = (interestAmount * kkdfRate) / 100;
 
-    bsmvMiktari = (faizTutari * bsmvOrani) / 100;
-    kkdfMiktari = (faizTutari * kkdfOrani) / 100;
-
-    taksitTutari =
-      (krediTutari * faizOrani * taksitSayisi +
-        (bsmvMiktari + kkdfMiktari) +
-        krediTutari) /
-      taksitSayisi;
-    // FARK = TAKSİT TUTARI - (FAIZ+BSMV+KKDF MIKTARI)
-    anaPara = faizTutari + krediTutari;
-    // const fark= (faizTutari + bsmvMiktari + kkdfMiktari) - taksitTutari;
-    kalanAnaPara = anaPara - taksitTutari;
-    // console.log(taksitTutari, anaPara, kalanAnaPara, );
-    karTutari = krediTutari * (1 + faizOrani) ** (aralik / 30) - anaPara;
+    installmentAmount = ((creditAmount * interestRate * installmentNumber + (bsmvQuantity + kkdfQuantity) + creditAmount) / installmentNumber).toFixed(2);
+    //taksit tutarı - ( BSMV+KKDF)
+    principal = (installmentAmount - (bsmvQuantity + kkdfQuantity)).toFixed(2);
+    //Kredi miktarı - taksit tutarı 
+    remainingPrincipal = (creditAmount - installmentAmount).toFixed(2);
+    profitAmount = (creditAmount * (1 + interestRate) ** (space / 30) - principal).toFixed(2);
   }
 
-  if (data.karFormulu === "bilesik") {
-    const faizOrani = data.faizOrani;
-    const taksitSayisi = data.taksitSayisi;
-    const krediTutari = data.krediTutari;
-    const faizTutari = krediTutari * faizOrani * taksitSayisi;
-    anaPara = faizTutari + krediTutari;
+  if (data.profitPeriod === "bilesik") {
+    const interestRate = data.interestRate;
+    const installmentNumber = data.installmentNumber;
+    const creditAmount = data.creditAmount;
+    const interestAmount = creditAmount * interestRate * installmentNumber;
+    // principal = installmentAmount - (bsmvQuantity + kkdfQuantity);
 
-    for (let i = 0; i <= data.taksitSayisi; i++) {
-      taksitTutari =
-      data.krediTutari * data.faizOrani * (1 + data.faizOrani) ** 12;
-
-      anaPara -= taksitTutari;
-      console.log("sdsadd", anaPara);
-      kalanAnaPara = anaPara - taksitTutari;
-
-      // Kâr = ( Anapara * ( ( 1 + kâr oranı) ^ (gün sayısı / 30) ) ) - Anapara
-      karTutari = krediTutari * (1 + faizOrani) ** (aralik / 30) - anaPara;
-      console.log("kar tutarı", karTutari);
-      bsmvMiktari = (faizTutari * bsmvOrani) / 100;
-      kkdfMiktari = (faizTutari * kkdfOrani) / 100;
+    for (let i = 0; i <= data.installmentNumber; i++) {
+      installmentAmount = creditAmount * (1 + interestRate) ** (space / 30) - principal;;
+      principal = installmentAmount - (bsmvQuantity + kkdfQuantity);
+      remainingPrincipal = (creditAmount - installmentAmount).toFixed(2);
+      profitAmount = creditAmount * (1 + interestRate) ** (space / 30) - principal;
+      bsmvQuantity = (interestAmount * bsmvRate) / 100;
+      kkdfQuantity = (interestAmount * kkdfRate) / 100;
     }
   }
 
 
-  console.log("taksit tutarı", taksitTutari);
   if (data) {
-   
- 
-  const tableData = Array(+data.taksitSayisi)
+  const tableData = Array(+data.installmentNumber)
     .fill(null)
     .map((_, idx) => {
       return {
-        taksitNo: idx + 1,
-        taksitTutari: taksitTutari,
-        anaPara: anaPara,
-        kalanAnaPara: kalanAnaPara,
-        karTutari: karTutari,
-        KKDF: kkdfMiktari,
-        BSMV: bsmvMiktari,
+        paymentNumber: idx + 1,
+        installmentAmount: installmentAmount,
+        principal: principal,
+        remainingPrincipal: remainingPrincipal,
+        profitAmount: profitAmount,
+        KKDF: kkdfQuantity,
+        BSMV: bsmvQuantity,
       };
     });
 
@@ -112,12 +95,12 @@ const Table = () => {
         <tbody>
           {tableData.map((i) => {
             return (
-              <tr key={i.taksitNo}>
-                <td>{i.taksitNo}</td>
-                <td>{i.taksitTutari}</td>
-                <td>{i.anaPara}</td>
-                <td>{i.kalanAnaPara}</td>
-                <td>{i.karTutari}</td>
+              <tr key={i.paymentNumber}>
+                <td>{i.paymentNumber}</td>
+                <td>{i.installmentAmount}</td>
+                <td>{i.principal}</td>
+                <td>{i.remainingPrincipal}</td>
+                <td>{i.profitAmount}</td>
                 <td>{i.KKDF}</td>
                 <td>{i.BSMV}</td>
               </tr>

@@ -20,7 +20,7 @@ const Navbar = () => {
             <Search className="search-icon" />
             <input
               className="search-input"
-              placeholder="Search for friend, post or video"
+              placeholder="Search..."
             />
           </div>
         </div>

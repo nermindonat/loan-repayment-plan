@@ -18,15 +18,13 @@ const UserForm = () => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     setData({
-      krediTutari: loanAmountRef.current.getValue(),
-      taksitSayisi: paymentNumberRef.current.getValue(),
-      faizOrani: profitRateRef.current.getValue(),
-      taksitAraligi: selectOneRef.current.getValue(),
-      vergiOrani: selectTwoRef.current.getValue(),
-      karFormulu: selectThreeRef.current.getValue(),
+      creditAmount: loanAmountRef.current.getValue(),
+      installmentNumber: paymentNumberRef.current.getValue(),
+      interestRate: profitRateRef.current.getValue(),
+      installmentInterval: selectOneRef.current.getValue(),
+      taxRate: selectTwoRef.current.getValue(),
+      profitPeriod: selectThreeRef.current.getValue(),
     });
-
-
   };
 
   return (
@@ -35,27 +33,25 @@ const UserForm = () => {
         <Input
           label={"Kredi Tutari"}
           type="number"
-          name={"krediTutari"}
-          id={"krediTutari"}
+          name={"creditAmount"}
           ref={loanAmountRef}
         />
         <Input
           label={"Taksit sayisi"}
           type="number"
-          name={"taksitSayisi"}
-          id={"taksitSayisi"}
+          name={"installmentNumber"}
           ref={paymentNumberRef}
         />
         <Input
           label={"Faiz Orani"}
           type="number"
-          name={"faizOrani"}
+          name={"interestRate"}
           ref={profitRateRef}
         />
 
         <Select
           label={"Taksit Aralığı"}
-          name={"taksitAraligi"}
+          name={"installmentInterval"}
           ref={selectOneRef}
           options={[
             { label: "Haftalık", value: "haftalik" },
@@ -65,7 +61,7 @@ const UserForm = () => {
         />
         <Select
           label={"Vergi Oranı"}
-          name={"vergiOrani"}
+          name={"taxRate"}
           ref={selectTwoRef}
           options={[
             { label: "KKDF", value: "kkdf" },
@@ -74,7 +70,7 @@ const UserForm = () => {
         />
         <Select
           label={"Kar Formülü"}
-          name={"karFormulu"}
+          name={"profitPeriod"}
           ref={selectThreeRef}
           options={[
             { label: "Basit", value: "basit" },
@@ -82,7 +78,7 @@ const UserForm = () => {
           ]}
         />
         <button type="submit" onClick={formSubmitHandler}>
-          Submit
+          Hesapla
         </button>
       </form>
     </div>
