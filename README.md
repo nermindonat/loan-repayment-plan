@@ -1,3 +1,13 @@
+
+A loan calculation project I did at a practicum I attended through Patika.dev. I developed it with React.js.
+
+
+![image](https://github.com/nermindonat/loan-repayment-plan/assets/70170606/4a1205e8-bcf2-4974-ba3f-47f21e8bbb02)
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
